@@ -24,11 +24,10 @@
                 margin: 2%;
             }
             #calendario{
-                margin-left: 12%;
+                margin-left: 10%;
                 width: 25%;
                 float: left;
-            }
-            
+            }        
             #imagen{
                 float: left;
                 margin-left: 2%;
@@ -158,15 +157,56 @@
         
         <div id="cuerpo">
             <div id="eventos">
-                <p:contentFlow value="#{imagesView.images}" var="image">
-                    <p:graphicImage name="imagenes/#{image}" styleClass="content" />
-                    <div class="caption">#{image}</div>
-                </p:contentFlow>
+                <h:form>
+                    <p:growl id="msgs" showDetail="true" />
+
+                    <p:panel id="basic" header="Concierto de Ricky Martin" style="margin-bottom:20px">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputText
+                                value="Ricky Martin regresa a los escenarios de nuestro país con ‘One World Tour’, una de las giras más exitosas de este momento que colgó el cartel de ‘No Hay Entradas’ en sus shows españoles del pasado año.
+
+‘One World Tour’ es un espectáculo impresionante que cuenta con extraordinarios juegos de iluminación, diseñados con más de 150 luces móviles y cinco pantallas de vídeo de alta definición; una moderna escenografía en sincronía con el aspecto visual y musical; cambios de vestuario y vibrantes coreografías, complementan la proyección escénica del artista, quien desde el primer momento cautiva la atención del público.
+
+-Platinum: Acceso exclusivo con acreditación para acceder a la zona Platinum situada en pista frente al escenario. Atención personalizada con barra propia, w.c. y photocall.
+
+-General Grada (Sin numerar): Acceso general habilitado a la zona de Grada no numerado." />
+                        </h:panelGrid>
+                        
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
+
+                            <p:panel id="basic" header="Detalles" style="margin-bottom:20px">
+                                <h:panelGrid columns="3" cellpadding="10">
+                                    <h:outputText value="Fecha Inicio: 17/07/2017"/>
+                                    <h:outputText value="Fecha Fin: 25/07/2017"/>
+                                    <h:outputText value="Hora: 20:00h"/>
+                                    <h:outputText value="Aforo: 250 personas"/>
+                                    <h:outputText value="Precio: 15€"/>
+                                    <h:commandButton value="Comprar Entradas" actionListener="#"/>
+                                </h:panelGrid>
+                            </p:panel>
+
+                        </h:form>
+                    </p:panel>
+                </h:form>
+                
+                <h:form>
+                    <p:growl id="msgs" showDetail="true" />
+
+                    <p:panel id="basic" header="Ubicación" style="margin-bottom:20px">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage value="imagenes/Localizacion.PNG"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
             </div>
-            
             
             <div id="calendario">
                 
+                <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                    <p:graphicImage value="imagenes/#{image}" title="Concierto"/>
+                </p:galleria>
+            
                 <h:form id="form">
                     <p:growl id="msgs" showDetail="true" />
                     <h:panelGrid columns="2" cellpadding="5">
@@ -184,7 +224,6 @@
                         </p:panelGrid>
                     </p:dialog>
                 </h:form>
-                
             </div>
        
         
@@ -206,6 +245,3 @@
         </div>
     </h:body>
 </html>
-
-
-

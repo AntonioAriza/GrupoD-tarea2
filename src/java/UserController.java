@@ -77,7 +77,7 @@ public class UserController implements Serializable{
                 error = "Los campos " + err + " son obligatorios.";
             }
             
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, error, error));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, error, error));
             return "registration.jsf?faces-redirect=true";
         }else{
             return "InicioSesion.xhtml";
