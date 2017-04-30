@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <title>AgendaMLG - Diario SUR</title>
+    </h:head>
+    <h:body>
+        <h1>
+          Agenda Diario SUR  
+        </h1>
+    
+        <h:form>  
+            <p:growl id="messages"/>
+
+            <p:menubar>
+                <p:menuitem value="Inicio" url="Principal.xhtml" icon="ui-icon-document" />
+
+                <p:submenu label="Tipos de Eventos" icon="ui-icon-pencil">
+                    <p:menuitem value="Para niños" url="#"/>
+                    <p:menuitem value="Monólogos" url="#"/>
+                    <p:submenu label="Deportivos">
+                        <p:menuitem value="Fútbol" url="#" />
+                        <p:menuitem value="Baloncesto" url="#" />
+                        <p:menuitem value="Tenis" url="#" />
+                        <p:menuitem value="Natación" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Danzas">
+                        <p:menuitem value="Ballet" url="#" />
+                        <p:menuitem value="Flamenco" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Culturales">
+                        <p:menuitem value="Museos" url="#" />
+                        <p:menuitem value="Teatro" url="#" />
+                        <p:menuitem value="Exposiciones" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Música">
+                        <p:menuitem value="Conciertos" url="#" />
+                        <p:menuitem value="Festivales" url="#" />
+                        <p:menuitem value="Musicales" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Turísticos">
+                        <p:menuitem value="Visitas Guiadas" url="#" />
+                        <p:menuitem value="Parques Temáticos" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Eventos Profesionales">
+                        <p:menuitem value="Congresos" url="#" />
+                        <p:menuitem value="Conferencias" url="#" />
+                        <p:menuitem value="Ferias" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                </p:submenu>
+
+                <p:submenu label="Calendario" icon="ui-icon-calendar">
+                    <p:menuitem value="Hoy" url="#" />
+                    <p:menuitem value="Esta semana" url="#" />
+                    <p:menuitem value="Este mes" url="#" />
+                </p:submenu>
+                
+                <p:menuitem value="Búsqueda Avanzada" icon="ui-icon-search"/>
+                
+                <c:choose>
+                    <c:when test="true">
+                        <p:menuitem value="Iniciar Sesión" icon="ui-icon-contact"/>
+                    </c:when>
+                    <c:otherwise>
+                        <p:menuitem value="Mi Perfil" icon="ui-icon-contact"/>
+                        <p:menuitem value="Cerrar Sesión" icon="ui-icon-close"/>
+                    </c:otherwise>
+                </c:choose>
+                
+
+                <f:facet name="options">
+                    <p:inputText style="margin-right:10px" placeholder="Buscador"/>
+                    <p:commandButton type="button" value="Buscar" icon="ui-icon-search" />
+                </f:facet>
+            </p:menubar>
+        </h:form>
+        <br/>
+        <h:form id="registrationForm">
+            <p:panel header="Registro" style="width: 500px;">
+                <p:messages />
+                <h:panelGrid columns="3">
+                    <p:outputLabel value="Usuario:*"/>
+                    <p:inputText id="userName" value="#{userController.registrationUser.userName}"
+                                label="UserName" >
+                     
+                    </p:inputText>
+                    <p:message id="userNameMsg" for="userName"/>
+
+                    <p:outputLabel value="Contraseña:*"/>
+                    <p:password id="password" value="#{userController.registrationUser.password}" label="Password">
+                        
+                    </p:password>
+                    <p:message id="passwordMsg" for="password"/>
+
+                    <p:outputLabel value="Nombre:*"/>
+                    <p:inputText id="firstName" value="#{userController.registrationUser.firstName}"
+                                  label="FirstName">
+
+                    </p:inputText>
+                    <p:message id="firstNameMsg" for="firstName"/>
+
+                    <p:outputLabel value="Apellido:"/>
+                    <p:inputText id="lastName" value="#{userController.registrationUser.lastName}"/>
+                    <p:message id="lastNameMsg" for="lastName"/>
+
+                    <p:outputLabel value="Email:"/>
+                    <p:inputText id="email" value="#{userController.registrationUser.email}"/>
+                    <p:message id="emailMsg" for="email"/>
+
+                    <p:outputLabel value=""/>
+                    <p:commandButton action="#{userController.register}" value="Registrarse" update="registrationForm"/>
+                    <p:outputLabel value=""/>
+
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+
