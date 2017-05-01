@@ -4,22 +4,68 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Facelet Title</title>
+        <style type="text/css">
+            html,body{margin:0;padding:0;width:100%;height:100%;font-family:"Trebuchet MS",verdana,arial;}
+            #texto{width:25%;float:left;vertical-align:middle;padding: 2%;}
+            #mapa{width:50%;height:50%;float:right;}
+            #anuncio{bottom:16px;position:absolute;right:0;width:160px;z-index:100}
+        </style>
+        <script src="https://maps.google.com/maps/api/js?sensor=false&amp;language=es"></script>
+        <script>
+            <!-- //
+            var map;
+            var geocoder;
+            var infoWindow;
+            var marker;
+            window.onload = function () {
+                var latLng = new google.maps.LatLng(36.7195916, -4.425103700000022);
+                var opciones = {
+                    center: latLng,
+                    zoom: 14,
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                };
+                var map = new google.maps.Map(document.getElementById('mapa'), opciones);
+                geocoder = new google.maps.Geocoder();
+                infowindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(map, 'click', function (event) {
+                    geocoder.geocode({
+                        'latLng': event.latLng
+                    }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[0]) {
+                                document.getElementById('direccion').innerHTML = '<br /><span style="color:#FF0099">' + results[0].formatted_address + '</span>';
+                                document.getElementById('coordenadas').innerHTML = '<br /><span style="color:#FF0099">' + results[0].geometry.location + '</span>';
+                                if (marker) {
+                                    marker.setPosition(event.latLng)
+                                } else {
+                                    marker = new google.maps.Marker({
+                                        position: event.latLng,
+                                        map: map
+                                    })
+                                }
+                                infowindow.setContent(results[0].formatted_address + '<br/> Coordenadas: ' + results[0].geometry.location);
+                                infowindow.open(map, marker)
+                            } else {
+                                document.getElementById('mensaje').innerHTML = 'No se encontraron resultados'
+                            }
+                        } else {
+                            document.getElementById('mensaje').innerHTML = 'Geocodificación  ha fallado debido a: ' + status
+                        }
+                    });
+                });
+            }
+            // -->
+        </script>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <script src="http://maps.google.com/maps/api/js?sensor=false&callback=iniciar">
-</script>
-
-<script>
-function iniciar() {
-var mapOptions = {
-center: new google.maps.LatLng(25.80, -80.30),
-zoom: 10,
-mapTypeId: google.maps.MapTypeId.ROADMAP};
-var map = new google.maps.Map(document.getElementById("map"),mapOptions);}		
-</script>
-
-<div id="map"></div>
+         <div id="texto">
+            <h3> Haga click sobre el mapa y verá su dirección</h3>
+            Dirección del click: <span id="direccion" style="color: #00FFB3;"></span>
+            <br/>
+            Coordenadas: <span id="coordenadas" style="color: #00FFB3;"></span>
+            <br />
+            <span id="mensaje"></span>
+        </div>
+        <div id="mapa"></div>
     </h:body>
 </html>
-

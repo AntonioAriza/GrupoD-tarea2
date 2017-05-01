@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+ <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <link href="CSS/Estilo.css" rel="stylesheet" type="text/css" />
+    <h:head>
+        <title>AgendaMLG - Diario SUR</title>
+    </h:head>
+    <h:body>
+        <h1>
+          Agenda Diario SUR  
+        </h1>
+    
+        <h:form>  
+            <p:growl id="messages"/>
+
+            <p:menubar>
+                <p:menuitem value="Inicio" url="Principal.xhtml" icon="ui-icon-document" />
+
+                <p:submenu label="Tipos de Eventos" icon="ui-icon-pencil">
+                    <p:menuitem value="Para niños" url="#"/>
+                    <p:menuitem value="Monólogos" url="#"/>
+                    <p:submenu label="Deportivos">
+                        <p:menuitem value="Fútbol" url="#" />
+                        <p:menuitem value="Baloncesto" url="#" />
+                        <p:menuitem value="Tenis" url="#" />
+                        <p:menuitem value="Natación" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Danzas">
+                        <p:menuitem value="Ballet" url="#" />
+                        <p:menuitem value="Flamenco" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Culturales">
+                        <p:menuitem value="Museos" url="#" />
+                        <p:menuitem value="Teatro" url="#" />
+                        <p:menuitem value="Exposiciones" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Música">
+                        <p:menuitem value="Conciertos" url="#" />
+                        <p:menuitem value="Festivales" url="#" />
+                        <p:menuitem value="Musicales" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Turísticos">
+                        <p:menuitem value="Visitas Guiadas" url="#" />
+                        <p:menuitem value="Parques Temáticos" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                    <p:submenu label="Eventos Profesionales">
+                        <p:menuitem value="Congresos" url="#" />
+                        <p:menuitem value="Conferencias" url="#" />
+                        <p:menuitem value="Ferias" url="#" />
+                        <p:menuitem value="Otros..." url="#" />
+                    </p:submenu>
+                </p:submenu>
+
+                <p:submenu label="Calendario" icon="ui-icon-calendar">
+                    <p:menuitem value="Hoy" url="#" />
+                    <p:menuitem value="Esta semana" url="#" />
+                    <p:menuitem value="Este mes" url="#" />
+                </p:submenu>
+                
+                <p:menuitem value="Búsqueda Avanzada" icon="ui-icon-search"/>
+                
+                <c:choose>
+                    <c:when test="true">
+                        <p:menuitem value="Iniciar Sesión" icon="ui-icon-contact"/>
+                    </c:when>
+                    <c:otherwise>
+                        <p:menuitem value="Mi Perfil" icon="ui-icon-contact"/>
+                        <p:menuitem value="Cerrar Sesión" icon="ui-icon-close"/>
+                    </c:otherwise>
+                </c:choose>
+                
+
+                <f:facet name="options">
+                    <p:inputText style="margin-right:10px" placeholder="Buscador"/>
+                    <p:commandButton type="button" value="Buscar" icon="ui-icon-search" />
+                </f:facet>
+            </p:menubar>
+        </h:form>
+        
+        <br></br> <br></br>
+        
+        <h:form>
+            
+            <p:growl id="growl" sticky="true" showDetail="true"/>
+            
+            <p:wizard flowListener="#{eventoController.onFlowProcess}">
+                <p:tab id="personal" title="Nuevo Evento">
+                    <p:panel header="Primeros detalles">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Título *" />
+                                <p:inputText value="#{eventoController.event.firstname}" required="true" label="Firstname"/>
+
+                                <h:outputText value="Temática: *" />
+                                <p:inputText value="#{eventoController.event.lastname}" required="true" label="Lastname"/>
+
+                                <h:outputText value="Aforo máximo: " />
+                                <p:inputText value="#{eventoController.event.aforo}" />
+
+
+
+
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" columnClasses="label,calendar">
+                                <h:outputText value="Dia y hora del evento:" />
+                                <p:calendar id="datetime" value="#{eventoController.event.date0}" pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:panelGrid>
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="address" title="Dirección">
+                    <p:panel header="Más detalles">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                            
+                                <h:outputText value="Provincia: " />
+                                <p:inputText value="#{eventoController.event.city}" />
+
+                                <h:outputText value="Localidad " />
+                                <p:inputText value="#{eventoController.event.localidad}" />
+
+                                <h:outputText value="Dirección: " />
+                                <p:inputText value="#{eventoController.event.street}" />
+
+                                <h:outputText value="Código postal: " />
+                                <p:inputText value="#{eventoController.event.postalCode}" />
+                            </h:panelGrid>    
+
+                             <h:panelGrid columns="2" columnClasses="label, calendar">        
+                                <h:outputText value="Finaliza día: " />
+                                <p:calendar id="popup" value="#{eventoController.event.date2}" />
+
+                                <h:outputText value="Hora Finalización: " />
+                                <p:calendar value="#{eventoController.event.date4}" pattern="HH:mm" timeOnly="true"  />
+                                
+
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="contact" title="Contacto">
+                    <p:panel header="Información de contacto">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Email: *" />
+                            <p:inputText value="#{eventoController.event.email}" required="true" label="Email"/>
+
+                            <h:outputText value="Teléfono: " />
+                            <p:inputText value="#{eventoController.event.phone}"/>
+                            
+                            <h:outputText value="Información Adicional: " />
+                            <p:inputText value="#{eventoController.event.info}"/>
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirm" title="Confirmación">
+                    <p:panel header="Confirma que los datos son correctos:">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Título del evento: " />
+                                <h:outputText value="#{eventoController.event.firstname}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Temática: " />
+                                <h:outputText value="#{eventoController.event.lastname}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Aforo máximo permitido: " />
+                                <h:outputText value="#{eventoController.event.aforo}" styleClass="outputLabel"/>
+                                
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Calle: " />
+                                <h:outputText value="#{eventoController.event.street}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Código postal: " />
+                                <h:outputText value="#{eventoController.event.postalCode}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Ciudad: " />
+                                <h:outputText value="#{eventoController.event.city}" styleClass="outputLabel"/>
+                                
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Email: " />
+                                <h:outputText value="#{eventoController.event.email}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Teléfono de contacto " />
+                                <h:outputText value="#{eventoController.event.phone}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Información adicional: " />
+                                <h:outputText value="#{eventoController.event.info}" styleClass="outputLabel"/>
+
+                                <h:outputText />
+                                <h:outputText />
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Crear evento" actionListener="#{eventoController.save}" update="growl" process="@this"/>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+
+        </h:form>
+
+        <h:form enctype="multipart/form-data">
+            <h1>
+              ¿ya has creado tu evento? ¡no te quedes ahí! 
+            </h1>
+            <p:panel header="Puedes subir hasta 6 archivos diferentes (fotos, vídeos, etc ):" style="margin-bottom: 20px">
+                              
+                <p:growl id="messages" showDetail="true" />
+
+                <p:fileUpload value="#{eventoController.event.file1}" mode="simple"/>
+                <p:commandButton value="Subir archivo 1" ajax="false" actionListener="#{eventoController.event.upload1}" disabled="false" />
+                <br></br> <br></br>
+                <p:fileUpload value="#{eventoController.event.file2}" mode="simple"/>
+                <p:commandButton value="Subir archivo 2" ajax="false" actionListener="#{eventoController.event.upload2}" disabled="false" />
+                <br></br> <br></br>
+                <p:fileUpload value="#{eventoController.event.file3}" mode="simple"/>
+                <p:commandButton value="Subir archivo 3" ajax="false" actionListener="#{eventoController.event.upload3}" disabled="false" />   
+                <br></br> <br></br>
+                <p:fileUpload value="#{eventoController.event.file4}" mode="simple"/>
+                <p:commandButton value="Subir archivo 4" ajax="false" actionListener="#{eventoController.event.upload4}" disabled="false" />
+                <br></br> <br></br>
+                <p:fileUpload value="#{eventoController.event.file5}" mode="simple"/>
+                <p:commandButton value="Subir archivo 5" ajax="false" actionListener="#{eventoController.event.upload5}" disabled="false" />
+                <br></br> <br></br>
+                <p:fileUpload value="#{eventoController.event.file6}" mode="simple"/>
+                <p:commandButton value="Subir archivo 6" ajax="false" actionListener="#{eventoController.event.upload6}" disabled="false" />   
+                
+            </p:panel>
+
+        </h:form>
+        
+
+    </h:body>
+</html>
